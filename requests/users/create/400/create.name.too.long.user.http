@@ -1,0 +1,9 @@
+# Request users
+POST http://{{host}}:{{port}}/users
+
+{
+    "first_name" : "012345678901234567890123456789012345678901234567890123456789",
+    "last_name" : "Lmao",
+    "email" : "ayy@lmao.com",
+    "phone" : "555-555-555"
+}

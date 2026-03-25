@@ -1,0 +1,5 @@
+# Request users
+
+# @prompt id user id
+
+DELETE http://{{host}}:{{port}}/users/{{id}}

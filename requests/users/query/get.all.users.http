@@ -1,0 +1,2 @@
+# Request users
+QUERY http://{{host}}:{{port}}/users

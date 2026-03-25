@@ -1,0 +1,12 @@
+# Request users
+
+# @prompt id user id
+
+PATCH http://{{host}}:{{port}}/users/{{id}}
+
+{
+    "first_name" : "tunituni",
+    "last_name" : "talaka ",
+    "email" : "tunituni@talakatalaka.com",
+    "phone" : "222-222-222"
+}
