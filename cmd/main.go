@@ -16,8 +16,6 @@ func main() {
 	_ = godotenv.Load()
 	address := bootstrap.Address()
 
-	//router := mux.NewRouter()
-
 	log := bootstrap.InitLogger()
 	db, err := bootstrap.DBConnection()
 
@@ -33,15 +31,8 @@ func main() {
 	ctx := context.Background()
 	userRepo := user.NewRepo(log, db)
 	userSrv := user.NewService(log, userRepo)
-	//userEnd := user.MakeEndpoints(userSrv,  user.Config{LimPageDef: pagLimDef})
 
 	h := handler.NewUserHTTPServer(ctx, user.MakeEndpoints(userSrv, user.Config{LimPageDef: pagLimDef}))
-
-	// router.HandleFunc("/users", userEnd.Create).Methods("POST")
-	// router.HandleFunc("/users", userEnd.GetAll).Methods("GET")
-	// router.HandleFunc("/users/{id}", userEnd.Get).Methods("GET")
-	// router.HandleFunc("/users/{id}", userEnd.Update).Methods("PATCH")
-	// router.HandleFunc("/users/{id}", userEnd.Delete).Methods("DELETE")
 
 	srv := &http.Server{
 		Handler:      accessControl(h),
