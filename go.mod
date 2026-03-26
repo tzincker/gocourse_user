@@ -5,6 +5,7 @@ go 1.26.1
 require (
 	github.com/go-kit/kit v0.13.0
 	github.com/joho/godotenv v1.5.1
+	github.com/tzincker/go_lib_response v0.0.1
 	github.com/tzincker/gocourse_domain v0.0.1
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.1
@@ -16,7 +17,6 @@ require (
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/tzincker/go_lib_response v0.0.1 // indirect
 )
 
 require (
