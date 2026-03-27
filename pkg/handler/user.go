@@ -6,57 +6,62 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
-	"github.com/gorilla/mux"
 	"github.com/tzincker/go_lib_response/response"
 	"github.com/tzincker/gocourse_user/internal/user"
 )
 
 func NewUserHTTPServer(ctx context.Context, endpoints user.Endpoints) http.Handler {
 
-	router := mux.NewRouter()
+	router := gin.Default()
 
 	opts := []httptransport.ServerOption{
 		httptransport.ServerErrorEncoder(encodeError),
 	}
 
-	router.Handle("/users", httptransport.NewServer(
+	router.POST("/users", ginDecode, gin.WrapH(httptransport.NewServer(
 		endpoint.Endpoint(endpoints.Create),
 		decodeCreateUser,
 		encodeResponse,
 		opts...,
-	)).Methods("POST")
+	)))
 
-	router.Handle("/users", httptransport.NewServer(
+	router.GET("/users", ginDecode, gin.WrapH(httptransport.NewServer(
 		endpoint.Endpoint(endpoints.GetAll),
 		decodeGetAllUsers,
 		encodeResponse,
 		opts...,
-	)).Methods("GET")
+	)))
 
-	router.Handle("/users/{id}", httptransport.NewServer(
+	router.GET("/users/:id", ginDecode, gin.WrapH(httptransport.NewServer(
 		endpoint.Endpoint(endpoints.Get),
 		decodeGetUser,
 		encodeResponse,
 		opts...,
-	)).Methods("GET")
+	)))
 
-	router.Handle("/users/{id}", httptransport.NewServer(
+	router.PATCH("/users/:id", ginDecode, gin.WrapH(httptransport.NewServer(
 		endpoint.Endpoint(endpoints.Update),
 		decodeUpdateUser,
 		encodeResponse,
 		opts...,
-	)).Methods("PATCH")
+	)))
 
-	router.Handle("/users/{id}", httptransport.NewServer(
+	router.DELETE("/users/:id", ginDecode, gin.WrapH(httptransport.NewServer(
 		endpoint.Endpoint(endpoints.Delete),
 		decodeDeleteUser,
 		encodeResponse,
 		opts...,
-	)).Methods("DELETE")
+	)))
 
 	return router
+}
+
+func ginDecode(c *gin.Context) {
+	ctx := context.WithValue(c.Request.Context(), "params", c.Params)
+	c.Request = c.Request.WithContext(ctx)
 }
 
 func decodeCreateUser(_ context.Context, r *http.Request) (any, error) {
@@ -84,18 +89,18 @@ func decodeGetAllUsers(_ context.Context, r *http.Request) (any, error) {
 	return req, nil
 }
 
-func decodeGetUser(_ context.Context, r *http.Request) (any, error) {
-	p := mux.Vars(r)
+func decodeGetUser(ctx context.Context, r *http.Request) (any, error) {
+	params := ctx.Value("params").(gin.Params)
 	req := user.GetReq{
-		ID: p["id"],
+		ID: params.ByName("id"),
 	}
 
 	return req, nil
 }
 
-func decodeUpdateUser(_ context.Context, r *http.Request) (any, error) {
-	p := mux.Vars(r)
-	id := p["id"]
+func decodeUpdateUser(ctx context.Context, r *http.Request) (any, error) {
+	params := ctx.Value("params").(gin.Params)
+	id := params.ByName("id")
 
 	var req user.UpdateReq
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -106,10 +111,10 @@ func decodeUpdateUser(_ context.Context, r *http.Request) (any, error) {
 	return req, nil
 }
 
-func decodeDeleteUser(_ context.Context, r *http.Request) (any, error) {
-	p := mux.Vars(r)
+func decodeDeleteUser(ctx context.Context, r *http.Request) (any, error) {
+	params := ctx.Value("params").(gin.Params)
 	req := user.DeleteReq{
-		ID: p["id"],
+		ID: params.ByName("id"),
 	}
 
 	return req, nil
