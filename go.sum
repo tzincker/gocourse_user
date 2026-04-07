@@ -82,8 +82,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
-github.com/tzincker/go_lib_response v0.0.1 h1:6v7q8y2UXtIQwID4fWKCnzwPWcTsFE9iJP9zghReac4=
-github.com/tzincker/go_lib_response v0.0.1/go.mod h1:zw7Eu0A7UiHzi+XBcG+kAXYYHbZ+nzt9WmssBmSTm0I=
+github.com/tzincker/go_lib_response v0.0.2 h1:Ye213xY2OJO2JLE5obzeqvkNQjTtJ1kfVn8I3qYOsM4=
+github.com/tzincker/go_lib_response v0.0.2/go.mod h1:m9nVqpmk1w4Vx/ko8Fgxhq+vrG3Vo6fxDJXk/3tj27s=
 github.com/tzincker/gocourse_domain v0.0.2 h1:TMv1wxnHZOpjSWqtx8WDhi1bH44HoEpxVpsezv0ghwY=
 github.com/tzincker/gocourse_domain v0.0.2/go.mod h1:WnFzkHfP0qJ0J+tJbsle3NTTFf/wTEPGxCNQzKKKKaY=
 github.com/tzincker/gocourse_meta v0.0.1 h1:8Lk4FK+h0q62J0Zxx54xjvm4AgVnD5iItgE72LcIblg=
